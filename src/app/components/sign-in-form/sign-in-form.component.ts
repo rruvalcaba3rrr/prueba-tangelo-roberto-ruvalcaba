@@ -20,7 +20,10 @@ export class SignInFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signInRequest() {}
+  signInRequest() {
+    var values = this.signInForm.value;
+
+  }
 
   openSignUpDialog() {
     this.dialog.open(SignUpFormComponent);

@@ -21,9 +21,10 @@
             <mat-label>Repite Contraseña</mat-label>
             <input matInput formControlName="confirmpassword" type="password">
         </mat-form-field>
+        <span *ngIf="errorInfo.hasError" class="error-msg">{{errorInfo.errMessage}}</span>
     </form>
-    <button mat-button color="warn" (click)="openSignInDialog()">¿Ya tienes cuenta? Inicia sesión</button>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button mat-raised-button (click)="signUpRequest()" [disabled]="!signUpForm.valid" color="primary">crear cuenta</button>
+    <button mat-button mat-dialog-close (click)="openSignInDialog()" style="color: blue;">¿Ya tienes cuenta? Inicia sesión</button>
+    <button mat-raised-button (click)="signUpRequest()" [disabled]="!signUpForm.valid" class="submit-btn">crear cuenta</button>
 </mat-dialog-actions>

@@ -10,9 +10,9 @@
             <input matInput formControlName="password" type="password">
         </mat-form-field>
     </form>
-    <button mat-button color="warn" (click)="openSignUpDialog()">¿No tienes una cuenta? Regístrate</button>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button mat-raised-button (click)="signInRequest()" [disabled]="!signInForm.valid" color="primary">Inicia
+    <button mat-button mat-dialog-close (click)="openSignUpDialog()" style="color: blue">¿No tienes una cuenta? Regístrate</button>
+    <button mat-raised-button (click)="signInRequest()" [disabled]="!signInForm.valid" class="submit-btn">Inicia
         Sesión</button>
 </mat-dialog-actions>
