@@ -1,0 +1,34 @@
+section {
+  margin-top: 3rem;
+  padding: 20px;
+  h1 {
+    font-size: 38px;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+  .cards-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+    .card {
+      margin-right: 15px;
+      background-color: aliceblue;
+      border-radius: 15px;
+      padding: 15px;
+      display: flex;
+      width: 350px;
+      height: 120px;
+      align-items: center;
+      justify-content: space-evenly;
+      .title {
+        font-size: 27px;
+        line-height: 1.3;
+      }
+      .number {
+        font-size: 24px;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<app-navbar-admin></app-navbar-admin>
+<section>
+    <h1>Hola, bienvenido de nuevo</h1>
+    <div class="cards-row">
+        <div class="card">
+            <p class="title">Monto base disponible</p>
+            <p class="number">{{ 1000000 | currency}}</p>
+        </div>
+        <div class="card" [ngStyle]="{'background-color': '#a3efaf'}">
+            <p class="title">Solicitudes aprobadas</p>
+            <p class="number">{{ 3 }}</p>
+        </div>
+        <div class="card" [ngStyle]="{'background-color': '#eaf272'}">
+            <p class="title">Solicitudes pendientes</p>
+            <p class="number">{{ 6 }}</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Registrate</h1>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="signUpForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput formControlName="name" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput formControlName="email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Cédula</mat-label>
+            <input matInput formControlName="cedula" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" type="password">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Repite Contraseña</mat-label>
+            <input matInput formControlName="confirmpassword" type="password">
+        </mat-form-field>
+    </form>
+    <button mat-button color="warn" (click)="openSignInDialog()">¿Ya tienes cuenta? Inicia sesión</button>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button (click)="signUpRequest()" [disabled]="!signUpForm.valid" color="primary">crear cuenta</button>
+</mat-dialog-actions>

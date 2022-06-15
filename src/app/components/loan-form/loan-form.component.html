@@ -1,0 +1,9 @@
+<div class="card">
+    <h1>Te damos hasta {{5000 | currency}}</h1>
+    <h3>¡Al instante!</h3>
+    <h2>Selecciona un monto</h2>
+    <ngx-slider [(value)]="amountSelected" [options]="options"></ngx-slider>
+    <button mat-raised-button color="primary" (click)="requestLoan()">
+        Solicitar prestamo
+    </button>
+</div>

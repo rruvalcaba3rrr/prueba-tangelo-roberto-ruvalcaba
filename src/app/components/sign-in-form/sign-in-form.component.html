@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Inicia Sesión</h1>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="signInForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput formControlName="email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" type="password">
+        </mat-form-field>
+    </form>
+    <button mat-button color="warn" (click)="openSignUpDialog()">¿No tienes una cuenta? Regístrate</button>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button (click)="signInRequest()" [disabled]="!signInForm.valid" color="primary">Inicia
+        Sesión</button>
+</mat-dialog-actions>

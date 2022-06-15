@@ -1,0 +1,36 @@
+.card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: -1px 1px 9px 1px rgba(118, 118, 118, 0.75);
+  -webkit-box-shadow: -1px 1px 9px 1px rgba(118, 118, 118, 0.75);
+  -moz-box-shadow: -1px 1px 9px 1px rgba(118, 118, 118, 0.75);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 400px;
+  h1 {
+    font-size: 38px;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+  h3 {
+    color: #ff5733;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  button {
+    padding: 13px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  @media screen and (max-width: 420px) {
+      width: 341px;
+  }
+}
