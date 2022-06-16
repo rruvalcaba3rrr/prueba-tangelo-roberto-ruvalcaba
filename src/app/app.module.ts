@@ -5,6 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+//Firebase
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 //Material module
 import { MaterialModule } from './material.module';
 //Extras
@@ -18,7 +23,6 @@ import { SignInAdminComponent } from './private/sign-in-admin/sign-in-admin.comp
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,9 @@ import { SignInFormComponent } from './components/sign-in-form/sign-in-form.comp
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    NgxSliderModule
+    NgxSliderModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

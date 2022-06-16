@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
+import { FirebaseAuthService } from 'src/app/services/firebase-auth/firebase-auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 
 @Component({
   selector: 'app-loan-form',
@@ -13,13 +16,17 @@ export class LoanFormComponent implements OnInit {
     floor: 1000,
     ceil: 5000
   };
-  constructor() { }
+  constructor(private fb_service: FirebaseAuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-  requestLoan(){
-    console.log(this.amountSelected);
-    
+  async requestLoan() {
+    var userActive = await this.fb_service.isLoggedIn();
+    if (userActive == undefined) {
+      this.dialog.open(SignUpFormComponent);
+      return;
+    }
+
   }
 }

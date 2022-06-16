@@ -105,6 +105,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "prueba-tangelo-roberto-ruvalcaba:build:production",
+            "firebaseProject": "prueba-tangelo",
+            "firebaseHostingSite": "prueba-tangelo"
+          }
         }
       }
     }

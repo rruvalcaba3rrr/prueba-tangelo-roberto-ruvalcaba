@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "prueba-tangelo": {
+      "hosting": {
+        "prueba-tangelo-roberto-ruvalcaba": [
+          "prueba-tangelo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "prueba-tangelo"
+  }
+}
