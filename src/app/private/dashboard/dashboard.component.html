@@ -4,15 +4,59 @@
     <div class="cards-row">
         <div class="card">
             <p class="title">Monto base disponible</p>
-            <p class="number">{{ 1000000 | currency}}</p>
+            <p class="number">{{ capitalAmount | currency}}</p>
         </div>
         <div class="card" [ngStyle]="{'background-color': '#a3efaf'}">
             <p class="title">Solicitudes aprobadas</p>
-            <p class="number">{{ 3 }}</p>
+            <p class="number">{{ totalLoans }}</p>
         </div>
         <div class="card" [ngStyle]="{'background-color': '#eaf272'}">
-            <p class="title">Solicitudes pendientes</p>
-            <p class="number">{{ 6 }}</p>
+            <p class="title">Solicitudes pendientes por pagar</p>
+            <p class="number">{{ pendingToPay }}</p>
         </div>
+    </div>
+    <div class="table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nombre de cliente</th>
+                <td mat-cell *matCellDef="let element"> {{element.clientName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Monto</th>
+                <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Estatus</th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.status === 1" class="badge pending">Pendiente por pagar</span>
+                    <span *ngIf="element.status === 2" class="badge paid">Pagado</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Fecha limite de pago</th>
+                <td mat-cell *matCellDef="let element"> {{element.paymentDate.toDate() | date:'dd-MM-yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary" >Pagar</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]"></mat-paginator>
+
     </div>
 </section>

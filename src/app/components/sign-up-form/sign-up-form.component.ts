@@ -37,24 +37,26 @@ export class SignUpFormComponent implements OnInit {
         'Las contraseñas no coinciden, verifiquelas e intente de nuevo';
       return;
     }
-    var client: Client = {
-      name: values.name,
-      email: values.email,
-      cedula: values.cedula,
-    }
 
     try {
       Swal.fire('¡Guardando!', 'Se está cargando la información...', 'info');
       Swal.showLoading();
 
       var auth = await this.fb_service.signupUser(values.email, values.password);
+      
+    var client: Client = {
+      uid: auth.user.uid,
+      name: values.name,
+      email: values.email,
+      cedula: values.cedula,
+    }
       await this.fb_service.createClient(client, auth.user.uid);
       Swal.close();
       this.fb_service.logOutUser();
       this.dialog.closeAll();
       Swal.fire(
         'Listo!',
-        'Su cuenta se ha creado y ahora podras solicitar un prestamo!',
+        'Su cuenta se ha creado y ahora podras solicitar un préstamo!',
         'success'
       )
     } catch (error) {

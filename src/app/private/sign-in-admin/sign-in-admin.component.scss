@@ -91,17 +91,20 @@ section {
   padding: 4px 10px;
   font-size: 12px;
   text-align: center;
+  max-width: 300px;
 }
 
-@media (max-width: 420px) {
+@media screen and (max-width: 420px) {
   section {
     .input-box {
       display: flex;
       flex-direction: column;
-      input{
+      input {
         width: auto;
       }
     }
-
+    .error-msg {
+      max-width: 216px;
+    }
   }
 }

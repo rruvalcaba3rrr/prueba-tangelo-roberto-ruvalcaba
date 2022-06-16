@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  backCapital: 1000000,
   firebase: {
     projectId: 'prueba-tangelo',
     appId: '1:770077487053:web:73e5373a63810368025e84',

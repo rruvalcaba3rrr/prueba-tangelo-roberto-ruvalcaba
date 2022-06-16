@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Client } from 'src/app/models/client';
 import { first } from 'rxjs/operators';
+import { Loan } from 'src/app/models/loan';
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +39,16 @@ export class FirebaseAuthService {
     try {
       var resp = await this.afs.collection('clients').doc(clientUid).set(client);
       return resp;
-
     } catch (error) {
       throw error;
-
+    }
+  }
+  async createLoan(loanInfo: Loan) {
+    try {
+      var resp = await this.afs.collection('loans').add(loanInfo);
+      return resp;
+    } catch (error) {
+      throw error;
     }
   }
 }

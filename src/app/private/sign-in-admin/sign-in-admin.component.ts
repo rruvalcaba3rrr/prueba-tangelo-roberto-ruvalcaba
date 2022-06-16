@@ -19,7 +19,7 @@ export class SignInAdminComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: FirebaseAuthService
+    private fb_service: FirebaseAuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: [
@@ -38,20 +38,19 @@ export class SignInAdminComponent implements OnInit {
   ngOnInit(): void {}
 
   async login() {
-    this.router.navigateByUrl('adminpanel/dashboard');
-    // this.showError = false;
-    // this.loading = true;
-    // try {
-    //   await this.authService.login(
-    //     this.loginForm.value.email,
-    //     this.loginForm.value.password
-    //   );
-    //   this.router.navigateByUrl('constructions');
-    // } catch (error: any) {
-    //   console.log(error);
-    //   this.showError = true;
-    //   this.loading = false;
-    //   this.loginError.message = error.message;
-    // }
+    this.showError = false;
+    this.loading = true;
+    try {
+      await this.fb_service.loginUser(
+        this.loginForm.value.email,
+        this.loginForm.value.password
+      );
+      this.router.navigateByUrl('adminpanel/dashboard');
+    } catch (error: any) {
+      console.log(error);
+      this.showError = true;
+      this.loading = false;
+      this.loginError.message = error.message;
+    }
   }
 }

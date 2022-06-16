@@ -1,9 +1,17 @@
-<div class="card">
+<div class="card" *ngIf="currentStep == 1">
     <h1>Te damos hasta {{5000 | currency}}</h1>
     <h3>¡Al instante!</h3>
     <h2>Selecciona un monto</h2>
     <ngx-slider [(value)]="amountSelected" [options]="options"></ngx-slider>
+    <button mat-raised-button color="primary" (click)="validateUser()">
+        Solicitar préstamo
+    </button>
+</div>
+<div class="card second" *ngIf="currentStep == 2">
+    <h2>Monto de préstamo: <span>{{amountSelected | currency}}</span></h2>
+    <h2>Selecciona una fecha de pago (opcional)</h2>
+    <mat-calendar [(selected)]="dateSelected" [minDate]="minDatePicker"></mat-calendar>
     <button mat-raised-button color="primary" (click)="requestLoan()">
-        Solicitar prestamo
+        Recibir préstamo
     </button>
 </div>

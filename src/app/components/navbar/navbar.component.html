@@ -1,9 +1,9 @@
 <div class="navbar">
-    <span class="title">Prestamos Tangelo</span>
+    <span class="title">PrÉstamos Tangelo</span>
     <div class="buttons">
         <ng-container *ngIf="userActive; else elseTemplate">
-            <button mat-icon-button style="width: 200px;">
-                Hola, {{userInformation?.name | slice: 0:18}}...
+            <button mat-icon-button style="width: 135px;">
+                Hola, {{userInformation?.name | slice: 0:10}}...
             </button>
             <button mat-icon-button (click)="logOutSesion()" style="color: red;">
                 cerrar sesión
