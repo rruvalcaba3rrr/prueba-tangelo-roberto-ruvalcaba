@@ -6,7 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Loan } from 'src/app/models/loan';
 import { environment } from 'src/environments/environment';
-
+import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -29,22 +30,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public pendingToPay: number = 0;
   public totalLoans: number = 0;
+  public loading:boolean = true;
 
   constructor(private firestore: AngularFirestore) {
-    this.loanSuscription = this.firestore
+    var loans$ = this.firestore
       .collection('loans')
-      .valueChanges()
-      .subscribe((data) => {
-        this.pendingToPay = data.filter((e:any) => e.status == 1).length;
-        this.totalLoans = data.length;
-        let pendingLoan = data.filter((e:any) => e.status == 1);
-        pendingLoan.forEach((element:any) => {
-            this.capitalAmount -= element.amount;
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((action) => {
+            const data = action.payload.doc.data() as any;
+            const id = action.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+
+    this.loanSuscription = loans$.subscribe((data: any) => {
+      this.pendingToPay = data.filter((e: any) => e.status == 1).length;
+      this.totalLoans = data.length;
+      let pendingLoan = data.filter((e: any) => e.status == 1);
+      if (pendingLoan.length > 0) {
+        var totalPendingAmount = 0;
+        pendingLoan.forEach((element: any) => {
+          totalPendingAmount += element.amount;
         });
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+        this.capitalAmount =  environment.backCapital - totalPendingAmount;
+      }else{
+        this.capitalAmount =  environment.backCapital;
+      }
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.loading = false;
+    });
   }
   ngOnDestroy(): void {
     this.loanSuscription.unsubscribe();
@@ -52,7 +71,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  payLoan(loan:Loan){
-
+  payLoan(loan: Loan) {
+    Swal.fire({
+      title: '¿Seguro que desea pagar este prestamo?',
+      text: '',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Pagar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await this.firestore.collection('loans').doc(loan.id).update({status: 2})
+        Swal.fire('Hecho!', 'Prestamo pagado correctamente', 'success');
+      }
+    });
   }
 }
